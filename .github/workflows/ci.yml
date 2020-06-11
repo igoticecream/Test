@@ -8,6 +8,9 @@ on:
     branches:
       - master
 
+env:
+  LIBNX: lib/libnx/nx
+
 jobs:
   build:
     name: Build
@@ -19,9 +22,11 @@ jobs:
         uses: actions/checkout@v2
         with:
           submodules: true
-      - name: Build Libnx
-        working-directory: lib/libnx
-        run: make -j$(nproc)
+      # - name: Build Libnx
+      #   run: make -j$(nproc)
+      #   working-directory: lib/libnx
       - name: Build App
+        run: |
+          echo $LIBNX
+          make -j$(nproc)
         working-directory: .
-        run: make -j$(nproc)
