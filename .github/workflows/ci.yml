@@ -1,4 +1,4 @@
-name: GitHub CI
+name: CI
 
 on:
   push:
@@ -10,13 +10,14 @@ on:
 
 jobs:
   build:
-    if: "!contains(github.event.commits[0].message, '[skip ci]')"
+    name: Build
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
     runs-on: ubuntu-latest
-    container: igoticecream/devkitpro:latest
+    container: igoticecream/devkitpro
     steps:
       - name: Checkout
         uses: actions/checkout@v2
         with:
           submodules: true
-      - name: Build
+      - name: Build App
         run: make -j$(nproc)
