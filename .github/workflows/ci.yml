@@ -15,10 +15,12 @@ jobs:
     runs-on: ubuntu-latest
     container: igoticecream/devkitpro
     env:
-      LIBNX: ./lib/libnx/nx
+      LIBNX: $GITHUB_WORKSPACE/lib/libnx/nx
     steps:
-      - name: Build Libnx
-        run: pwd $LIBNX
+      - name: Check dir
+        run: |
+          pwd $LIBNX
+          ls $LIBNX
       - name: Checkout
         uses: actions/checkout@v2
         with:
