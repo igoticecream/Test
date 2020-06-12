@@ -23,12 +23,7 @@ jobs:
         with:
           submodules: true
       - name: Build Libnx
-        uses: actions/cache@v2
-        with:
-          path: lib/libnx
-          key: ${{ runner.os }}-libnx
-        run: make -C lib/libnx -j$(nproc)
-        # working-directory: lib/libnx
+        run: make -j$(nproc) -C lib/libnx
       - name: Build Homebrew
         run: make -j$(nproc)
       - name: Upload
