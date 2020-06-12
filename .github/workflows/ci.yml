@@ -15,23 +15,16 @@ jobs:
     runs-on: ubuntu-latest
     container: igoticecream/devkitpro
     env:
-      PRUEBA1: ./lib/libnx/nx
-      PRUEBA2: $GITHUB_WORKSPACE/lib/libnx/nx
+      LIBNX: ./lib/libnx/nx
     steps:
       - name: Checkout
         uses: actions/checkout@v2
         with:
           submodules: true
-      - name: Set environment variables
-        run: echo ::set-env name=LIBNX::"$GITHUB_WORKSPACE/lib/libnx/nx"
       - name: Check dir
         run: |
           echo $LIBNX
           ls $LIBNX
-          echo $PRUEBA1
-          ls $PRUEBA1
-          echo $PRUEBA2
-          ls $PRUEBA2
       - name: Build Libnx
         run: make -j$(nproc) -C lib/libnx
       - name: Build Homebrew
