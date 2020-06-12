@@ -43,15 +43,14 @@ jobs:
         uses: actions/checkout@v2
         with:
           submodules: true
-
       - name: Build Libnx
         uses: igoticecream/devkitpro@master
         with:
           path: lib/libnx
-
       - name: Build Homebrew
         uses: igoticecream/devkitpro@master
-
+        env:
+          LIBNX: ${GITHUB_WORKSPACE}/lib/libnx/nx
       - name: Upload
         uses: actions/upload-artifact@v2
         with:
