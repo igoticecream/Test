@@ -30,7 +30,6 @@ jobs:
         with:
           path: lib/libnx
           key: ${{ runner.os }}-libnx-${{ steps.cache-libnx-key.outputs.key }}
-          restore-keys: ${{ runner.os }}-libnx-
 
       - name: Libnx - Build
         if: steps.cache-libnx.outputs.cache-hit != 'true'
@@ -38,7 +37,7 @@ jobs:
         with:
           path: lib/libnx
 
-      - name: Build Homebrew
+      - name: Build
         uses: igoticecream/devkitpro@v1
         env:
           LIBNX: ${GITHUB_WORKSPACE}/lib/libnx/nx
