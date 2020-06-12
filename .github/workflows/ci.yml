@@ -8,24 +8,45 @@ on:
     branches:
       - master
 
+# jobs:
+#   build:
+#     name: Build
+#     if: "!contains(github.event.head_commit.message, 'skip ci')"
+#     runs-on: ubuntu-latest
+#     container: igoticecream/devkitpro
+#     steps:
+#       - name: Checkout
+#         uses: actions/checkout@v2
+#         with:
+#           submodules: true
+#       - name: Build Libnx
+#         working-directory: lib/libnx
+#         run: make -j$(nproc)
+#       - name: Build Homebrew
+#         env:
+#           LIBNX: ${GITHUB_WORKSPACE}/lib/libnx/nx
+#         run: make -j$(nproc)
+#       - name: Upload
+#         uses: actions/upload-artifact@v2
+#         with:
+#           name: artifact
+#           path: test.nro
+
 jobs:
   build:
     name: Build
     if: "!contains(github.event.head_commit.message, 'skip ci')"
     runs-on: ubuntu-latest
-    container: igoticecream/devkitpro
+
     steps:
       - name: Checkout
         uses: actions/checkout@v2
         with:
           submodules: true
-      - name: Build Libnx
-        working-directory: lib/libnx
-        run: make -j$(nproc)
+
       - name: Build Homebrew
-        env:
-          LIBNX: ${GITHUB_WORKSPACE}/lib/libnx/nx
-        run: make -j$(nproc)
+        uses: igoticecream/devkitpro@master
+
       - name: Upload
         uses: actions/upload-artifact@v2
         with:
