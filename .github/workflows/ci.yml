@@ -19,14 +19,30 @@ jobs:
         uses: actions/checkout@v2
         with:
           submodules: true
+
+      - name: Cache Get Key
+        id: cache-libnx-key
+        run: echo "::set-output name=key::$(git submodule status | grep libnx | cut -d ' ' -f 2)"
+
+      - name: Yarn - process cache
+        id: cache-libnx
+        uses: actions/cache@v1
+        with:
+          path: lib/libnx
+          key: ${{ runner.os }}-libnx-${{ steps.cache-libnx-key.outputs.key }}
+          restore-keys: ${{ runner.os }}-libnx-
+
       - name: Build Libnx
+        if: steps.cache-libnx.outputs.cache-hit != 'true'
         uses: igoticecream/devkitpro@v1
         with:
           path: lib/libnx
+
       - name: Build Homebrew
         uses: igoticecream/devkitpro@v1
         env:
           LIBNX: ${GITHUB_WORKSPACE}/lib/libnx/nx
+
       - name: Upload
         uses: actions/upload-artifact@v2
         with:
