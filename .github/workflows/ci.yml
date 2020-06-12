@@ -25,7 +25,7 @@ jobs:
       #   run: make -j$(nproc) -C lib/libnx
       - name: Build Homebrew
         env:
-          LIBNX: $GITHUB_WORKSPACE/lib/libnx/nx
+          LIBNX: ${GITHUB_WORKSPACE}/lib/libnx/nx
         run: make -j$(nproc)
       - name: Upload
         uses: actions/upload-artifact@v2
