@@ -44,11 +44,11 @@ jobs:
         with:
           submodules: true
       - name: Build Libnx
-        uses: igoticecream/devkitpro@master
+        uses: igoticecream/devkitpro@v1
         with:
           path: lib/libnx
       - name: Build Homebrew
-        uses: igoticecream/devkitpro@master
+        uses: igoticecream/devkitpro@v1
         env:
           LIBNX: ${GITHUB_WORKSPACE}/lib/libnx/nx
       - name: Upload
