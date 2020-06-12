@@ -20,27 +20,49 @@ jobs:
         with:
           submodules: true
 
-      - name: Libnx - Cache Key
+      - name: "Libnx: Cache Key"
         id: cache-libnx-key
         run: echo "::set-output name=key::$(git submodule status | grep libnx | awk '{print $1}')"
 
-      - name: Libnx - Cache
+      - name: "Libnx: Cache"
         id: cache-libnx
         uses: actions/cache@v1
         with:
           path: lib/libnx
           key: ${{ runner.os }}-libnx-${{ steps.cache-libnx-key.outputs.key }}
 
-      - name: Libnx - Build
+      - name: "Libnx: Build"
         if: steps.cache-libnx.outputs.cache-hit != 'true'
         uses: igoticecream/devkitpro@v1
         with:
           path: lib/libnx
 
+      - name: "Libatmosphere: Cache Key"
+        id: cache-libatmosphere-key
+        run: echo "::set-output name=key::$(git submodule status | grep libatmosphere | awk '{print $1}')"
+
+      - name: "Libatmosphere: Cache"
+        id: cache-libatmosphere
+        uses: actions/cache@v1
+        with:
+          path: lib/libatmosphere
+          key: ${{ runner.os }}-libatmosphere-${{ steps.cache-libatmosphere-key.outputs.key }}
+
+      - name: "Libatmosphere: Build"
+        if: steps.cache-libatmosphere.outputs.cache-hit != 'true'
+        uses: igoticecream/devkitpro@v1
+        env:
+          LIBNX: ${GITHUB_WORKSPACE}/lib/libnx/nx
+        with:
+          path: lib/libatmosphere
+
       - name: Build
         uses: igoticecream/devkitpro@v1
         env:
           LIBNX: ${GITHUB_WORKSPACE}/lib/libnx/nx
+          LIBVAPOURS: ${GITHUB_WORKSPACE}/lib/libatmosphere/libvapours
+          LIBSTRATOSPHERE: ${GITHUB_WORKSPACE}/lib/libatmosphere/libstratosphere
+          LIBMESOSPHERE: ${GITHUB_WORKSPACE}/lib/libatmosphere/libmesosphere
 
       - name: Upload
         uses: actions/upload-artifact@v2

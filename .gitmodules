@@ -2,3 +2,7 @@
 	path = lib/libnx
 	url = git@github.com:switchbrew/libnx.git
 	branch = master
+[submodule "lib/libatmosphere"]
+	path = lib/libatmosphere
+	url = git@github.com:Atmosphere-NX/Atmosphere-libs.git
+	branch = master
