@@ -7,8 +7,7 @@
 #include <switch.h>
 
 // Main program entrypoint
-int main(int argc, char* argv[])
-{
+int main(int argc, char *argv[]) {
     // This example uses a text console, as a simple way to output text to the screen.
     // If you want to write a software-rendered graphics application,
     //   take a look at the graphics/simplegfx example, which uses the libnx Framebuffer API instead.
@@ -20,8 +19,7 @@ int main(int argc, char* argv[])
     printf("Hello World!\n");
 
     // Main loop
-    while (appletMainLoop())
-    {
+    while (appletMainLoop()) {
         // Scan all the inputs. This should be done once for each frame
         hidScanInput();
 

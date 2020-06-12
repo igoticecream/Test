@@ -1,0 +1,34 @@
+{
+    "env": {},
+    "configurations": [
+        {
+            "name": "Aarch64",
+            "includePath": [
+                "${workspaceFolder}/source",
+                "${workspaceFolder}/lib/libnx/nx/include",
+                "${workspaceFolder}/lib/libatmosphere/libstratosphere/include",
+                "${PORTLIBS}/include/**",
+                "${DEVKITA64}/aarch64-none-elf/include",
+                "${DEVKITA64}/lib/gcc/aarch64-none-elf/10.1.0/include"
+            ],
+            "defines": [
+                "SWITCH",
+                "__SWITCH__",
+                "__aarch64__"
+            ],
+            "compilerPath": "${DEVKITA64}/bin/aarch64-none-elf-g++",
+            "cStandard": "c18",
+            "cppStandard": "c++20",
+            "intelliSenseMode": "gcc-x64",
+            "browse": {
+                "databaseFilename": "",
+                "limitSymbolsToIncludedHeaders": true,
+                "path": [
+                    "${workspaceRoot}"
+                ]
+            },
+            "macFrameworkPath": []
+        }
+    ],
+    "version": 4
+}
