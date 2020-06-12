@@ -14,17 +14,24 @@ jobs:
     if: "!contains(github.event.head_commit.message, 'skip ci')"
     runs-on: ubuntu-latest
     container: igoticecream/devkitpro
+    env:
+      PRUEBA1: ./lib/libnx/nx
+      PRUEBA2: $GITHUB_WORKSPACE/lib/libnx/nx
     steps:
       - name: Checkout
         uses: actions/checkout@v2
         with:
           submodules: true
-      - name: Test
-        run: |
-          echo $GITHUB_WORKSPACE
-          echo $PWD
       - name: Set environment variables
-        run: echo ::set-env name=LIBNX::"/home/runner/work/test/test/lib/libnx/nx"
+        run: echo ::set-env name=LIBNX::"$GITHUB_WORKSPACE/lib/libnx/nx"
+      - name: Check dir
+        run: |
+          echo $LIBNX
+          ls $LIBNX
+          echo $PRUEBA1
+          ls $PRUEBA1
+          echo $PRUEBA2
+          ls $PRUEBA2
       - name: Build Libnx
         run: make -j$(nproc) -C lib/libnx
       - name: Build Homebrew
@@ -32,5 +39,5 @@ jobs:
       - name: Upload
         uses: actions/upload-artifact@v2
         with:
-          name: app
+          name: artifact
           path: test.nro
