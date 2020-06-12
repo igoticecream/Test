@@ -47,7 +47,7 @@ jobs:
       - name: Build Homebrew
         uses: igoticecream/devkitpro@master
         with:
-          command: make -j$(nproc)
+          command: make -j`nproc`
 
       - name: Upload
         uses: actions/upload-artifact@v2
