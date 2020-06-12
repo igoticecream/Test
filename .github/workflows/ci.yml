@@ -46,10 +46,6 @@ jobs:
 
       - name: Build Homebrew
         uses: igoticecream/devkitpro@master
-        env:
-          UNIT: $(nproc)
-        with:
-          command: make -j$UNIT
 
       - name: Upload
         uses: actions/upload-artifact@v2
