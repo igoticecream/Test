@@ -22,7 +22,7 @@ jobs:
 
       - name: Libnx - Cache Key
         id: cache-libnx-key
-        run: echo "::set-output name=key::$(git submodule status | grep libnx | cut -d ' ' -f 2)"
+        run: echo "::set-output name=key::$(git submodule status | grep libnx | awk '{print $1}')"
 
       - name: Libnx - Cache
         id: cache-libnx
