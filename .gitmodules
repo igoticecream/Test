@@ -1,0 +1,4 @@
+[submodule "lib/libnx"]
+	path = lib/libnx
+	url = git@github.com:switchbrew/libnx.git
+	branch = master
