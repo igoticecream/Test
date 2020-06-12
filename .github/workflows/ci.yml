@@ -19,12 +19,12 @@ jobs:
         uses: actions/checkout@v2
         with:
           submodules: true
-      - name: Set environment variables
-        run: echo ::set-env name=LIBNX::"$GITHUB_WORKSPACE/lib/libnx/nx"
-      - name: Check dir
+      - name: Test
         run: |
-          pwd $LIBNX
-          ls $LIBNX
+          echo $GITHUB_WORKSPACE
+          echo $PWD
+      - name: Set environment variables
+        run: echo ::set-env name=LIBNX::"/home/runner/work/test/test/lib/libnx/nx"
       - name: Build Libnx
         run: make -j$(nproc) -C lib/libnx
       - name: Build Homebrew
