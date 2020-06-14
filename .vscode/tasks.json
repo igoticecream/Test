@@ -8,7 +8,7 @@
             ]
         },
         "env": {},
-        "cwd": "${workspaceFolder}",
+        "cwd": "${workspaceFolder}"
     },
     "presentation": {
         "clear": true,
