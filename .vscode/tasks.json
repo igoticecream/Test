@@ -1,16 +1,14 @@
 {
     "version": "2.0.0",
     "options": {
-        "options": {
-            "shell": {
-                "executable": "/bin/zsh",
-                "args": [
-                    "-c"
-                ]
-            },
-            "env": {},
-            "cwd": "${workspaceFolder}"
-        }
+        "shell": {
+            "executable": "/bin/zsh",
+            "args": [
+                "-c"
+            ]
+        },
+        "env": {},
+        "cwd": "${workspaceFolder}",
     },
     "presentation": {
         "clear": true,
