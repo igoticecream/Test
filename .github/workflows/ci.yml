@@ -14,7 +14,7 @@ jobs:
     if: "!contains(github.event.head_commit.message, 'skip ci')"
     runs-on: ubuntu-latest
     steps:
-      - name: Get current date
+      - name: Current date
         id: date
         run: echo "::set-output name=date::$(date +'%Y%m%d')"
       - name: Checkout
@@ -40,17 +40,13 @@ jobs:
       - name: Build libatmosphere
         if: steps.cache.outputs.cache-hit != 'true'
         uses: igoticecream/devkitpro@v1
-        env:
-          LIBNX: ${GITHUB_WORKSPACE}/lib/libnx/nx
         with:
           path: lib/libatmosphere
+          envfile: .envrc
       - name: Build
         uses: igoticecream/devkitpro@v1
-        env:
-          LIBNX: ${GITHUB_WORKSPACE}/lib/libnx/nx
-          LIBVAPOURS: ${GITHUB_WORKSPACE}/lib/libatmosphere/libvapours
-          LIBSTRATOSPHERE: ${GITHUB_WORKSPACE}/lib/libatmosphere/libstratosphere
-          LIBMESOSPHERE: ${GITHUB_WORKSPACE}/lib/libatmosphere/libmesosphere
+        with:
+          envfile: .envrc
       - name: Upload
         uses: actions/upload-artifact@v2
         with:
