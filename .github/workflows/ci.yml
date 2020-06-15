@@ -42,11 +42,11 @@ jobs:
         uses: igoticecream/devkitpro@v1
         with:
           path: lib/libatmosphere
-          envfile: .envrc
+          envfile: /github/workspace/.envrc
       - name: Build
         uses: igoticecream/devkitpro@v1
         with:
-          envfile: .envrc
+          envfile: /github/workspace/.envrc
       - name: Upload
         uses: actions/upload-artifact@v2
         with:
