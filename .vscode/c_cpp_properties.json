@@ -6,6 +6,9 @@
             "includePath": [
                 "${workspaceFolder}/source",
                 "${workspaceFolder}/lib/libnx/nx/include",
+                "${workspaceFolder}/lib/libatmosphere/libvapours/include",
+                "${workspaceFolder}/lib/libatmosphere/libexosphere/include",
+                "${workspaceFolder}/lib/libatmosphere/libmesosphere/include",
                 "${workspaceFolder}/lib/libatmosphere/libstratosphere/include",
                 "${PORTLIBS}/include/**",
                 "${DEVKITA64}/aarch64-none-elf/include",
