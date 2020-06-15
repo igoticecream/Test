@@ -21,12 +21,12 @@ jobs:
         uses: actions/checkout@v2
         with:
           submodules: true
-      - name: Calculate cache key
+      - name: Cache key
         id: cache-key
         run: |
           echo "::set-output name=libnx::$(git submodule status | grep libnx | awk '{print $1}')"
           echo "::set-output name=libatmosphere::$(git submodule status | grep libatmosphere | awk '{print $1}')"
-      - name: Restore cache
+      - name: Cache restore
         id: cache
         uses: actions/cache@v1
         with:
