@@ -13,32 +13,30 @@ jobs:
     name: Build
     if: "!contains(github.event.head_commit.message, 'skip ci')"
     runs-on: ubuntu-latest
-
     steps:
+      - name: Get current date
+        id: date
+        run: echo "::set-output name=date::$(date +'%Y%m%d')"
       - name: Checkout
         uses: actions/checkout@v2
         with:
           submodules: true
-
       - name: Calculate cache key
         id: cache-key
         run: |
           echo "::set-output name=libnx::$(git submodule status | grep libnx | awk '{print $1}')"
           echo "::set-output name=libatmosphere::$(git submodule status | grep libatmosphere | awk '{print $1}')"
-
       - name: Restore cache
         id: cache
         uses: actions/cache@v1
         with:
           path: lib
           key: ${{ runner.os }}-${{ steps.cache-key.outputs.libnx }}-${{ steps.cache-key.outputs.libatmosphere }}
-
       - name: Build libnx
         if: steps.cache.outputs.cache-hit != 'true'
         uses: igoticecream/devkitpro@v1
         with:
           path: lib/libnx
-
       - name: Build libatmosphere
         if: steps.cache.outputs.cache-hit != 'true'
         uses: igoticecream/devkitpro@v1
@@ -46,7 +44,6 @@ jobs:
           LIBNX: ${GITHUB_WORKSPACE}/lib/libnx/nx
         with:
           path: lib/libatmosphere
-
       - name: Build
         uses: igoticecream/devkitpro@v1
         env:
@@ -54,9 +51,8 @@ jobs:
           LIBVAPOURS: ${GITHUB_WORKSPACE}/lib/libatmosphere/libvapours
           LIBSTRATOSPHERE: ${GITHUB_WORKSPACE}/lib/libatmosphere/libstratosphere
           LIBMESOSPHERE: ${GITHUB_WORKSPACE}/lib/libatmosphere/libmesosphere
-
       - name: Upload
         uses: actions/upload-artifact@v2
         with:
-          name: artifact
+          name: ${{ github.event.repository.name }}-${{ steps.date.outputs.date }}
           path: workspace.*
