@@ -49,6 +49,7 @@ jobs:
       - name: Build
         uses: igoticecream/devkitpro@v1
         with:
+          path: .
           envfile: .envrc
       - name: Upload
         uses: actions/upload-artifact@v2
