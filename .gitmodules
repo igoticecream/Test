@@ -10,3 +10,7 @@
 	path = lib/libtesla
 	url = git@github.com:WerWolv/libtesla.git
 	branch = master
+[submodule "lib/libborealis"]
+	path = lib/libborealis
+	url = git@github.com:natinusala/borealis.git
+	branch = master
