@@ -17,6 +17,7 @@ jobs:
       - name: Current date
         id: date
         run: |
+          nproc
           nproc --all
           echo "::set-output name=date::$(date +'%Y%m%d')"
       - name: Checkout
