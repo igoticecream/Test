@@ -31,7 +31,7 @@ jobs:
         uses: actions/cache@v1
         with:
           path: lib
-          key: ${{ runner.os }}-${{ steps.cache-key.outputs.libnx }}-${{ steps.cache-key.outputs.libatmosphere }}
+          key: ${{ runner.os }}-test-${{ steps.cache-key.outputs.libnx }}-${{ steps.cache-key.outputs.libatmosphere }}
       - name: Build libnx
         if: steps.cache.outputs.cache-hit != 'true'
         uses: igoticecream/devkitpro@v1
